@@ -3,6 +3,11 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
 import { FaCaretDown } from "react-icons/fa";
+//import Logo from "../../assets/website/logo.png"
+//import Img7 from "../../assets/product/p-7.jpg"
+import Img7 from "../../assets/logo1.png";
+//import Img7 from "../../assets/logosvg-output.svg";
+import PageIcon from "../PageIcon/PageIcon";
 
 const MenuLinks = [
   {
@@ -45,7 +50,7 @@ const DropdownLinks = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({ handleOrderPopup }) => {
   return (
     <div
       className="bg-white dark:bg-gray-900
@@ -61,7 +66,8 @@ const Navbar = () => {
               tracking-widest text-2xl uppercase
               sm:text-3xl"
             >
-              متجري
+              <img className="h-18 w-24" src={Img7} alt="logo"/>
+              {/* <PageIcon color={'primary'}/> */}
             </a>
             {/** Menu Items */}
             <div className="hidden lg:block">
@@ -132,7 +138,8 @@ const Navbar = () => {
             </div>
 
             {/** Order-button section */}
-            <button className="relative p-3">
+            <button className="relative p-3" onClick=
+            {handleOrderPopup}>
               <FaCartShopping
                 className="text-xl text-gray-600
                 dark:text-gray-400"

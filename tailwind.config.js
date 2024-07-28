@@ -22,6 +22,7 @@ export default {
           sm: '3rem',
         }
       },
+      
     },
   },
   plugins: [],

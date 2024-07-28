@@ -7,7 +7,7 @@ const DarkMode = () => {
         localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
     );
     const element = document.documentElement; // access to html element
-    console.log(element);
+    //console.log(element);
     //root.classList.toggle("dark-mode");
 
     // Set theme to localStorage and html element
