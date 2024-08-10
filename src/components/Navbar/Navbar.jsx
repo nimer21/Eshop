@@ -3,10 +3,7 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
 import { FaCaretDown } from "react-icons/fa";
-//import Logo from "../../assets/website/logo.png"
-//import Img7 from "../../assets/product/p-7.jpg"
 import Img7 from "../../assets/logo1.png";
-//import Img7 from "../../assets/logosvg-output.svg";
 import PageIcon from "../PageIcon/PageIcon";
 
 const MenuLinks = [
