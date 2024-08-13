@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <div className="dark:bg-gray-950">
       <div className="container">
-        <div className="grid md:grid-cols-3 pb-20 pt-5">
+        <div data-aos="zoom-in" className="grid md:grid-cols-3 pb-20 pt-5">
           {/* company details */}
           <div className="py-8 px-4">
             <a
