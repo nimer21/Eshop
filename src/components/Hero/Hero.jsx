@@ -89,6 +89,7 @@ const Hero = ({handleOrderPopup}) => {
                                     dark:text-white/5 sm:text-[80px] md:text-
                                     [100px] xl:text-[150px] font-bold'>{data.title2}</h1>
                                     <div
+                                    className='mr-4 py-5'
                                     data-aos="fade-up"
                                     data-aos-offset="0"
                                     data-aos-duration="500"

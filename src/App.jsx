@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Category from './components/Category/Category'
@@ -16,7 +16,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Pricing from './components/Pricing/Pricing.jsx'
 import PricingCard from './components/Pricing/PricingCard.jsx'
-import Loader from './components/Loader/Loader.jsx'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx'
 
 const BannerData = {
   discount: "30% OFF",
@@ -81,22 +81,23 @@ const dataPricingCard = [
 
 const App = () => {
   const [orderPopup, setOrderPopup] = useState(false);
-  const [pricePlan, setPricePlan] = useState([]);
-  const [loading, setLoading]  = useState(false);
 
-  const fetchPricePlanList = async () => {
-    setLoading(true);
-    const response = await fetch("https://demo9.art-feat.com/api/plan");
-        
-    const dataResponse = await response.json();
-    setLoading(false);
-    setPricePlan(dataResponse.data);
-};
+  const services = useRef(null);
+  const products = useRef(null);
+  const contact = useRef(null);
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
+
   const handleOrderPopup = () => {
     setOrderPopup(!orderPopup);
   };
   useEffect(() => {
-    fetchPricePlanList();
     AOS.init({
       duration: 1000,
       easing: "ease-in-sine",
@@ -109,36 +110,24 @@ const App = () => {
     });
     AOS.refresh();
   },[]);
-  if (loading) {
-    return <Loader />;
-  }
+  
   return (
     <div className='bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden'>
-      <Navbar handleOrderPopup={handleOrderPopup}/>
+      <ScrollToTop />
+      <Navbar handleOrderPopup={handleOrderPopup} boy={[services,products,contact]}/>
       <Hero handleOrderPopup={handleOrderPopup}/>
-      <div className='h-full px-6 py-12 lg:flex lg:justify-center
-   lg:items-center'>
-     <div className='grid lg:grid-cols-3 gap-12 lg:gap-0'>
-      {pricePlan.map(plan => (
-        <div className={`w-full max-w-md mx-auto ${
-          plan.featured ? "order-first lg:order-none lg:scale-110 lg:transform lg:z-10" 
-          : "lg:transform lg:scale-90"
-        }`}>
-        <PricingCard {...plan} key={plan.name}/>
-        </div>
-      ))}
-      </div>
-      </div>
+      <PricingCard/>
+      <Services ref={services}/>
+      <Services/>
       <Category/>
       <Category2/>
-      <Services/>
-      <Pricing/>
-      <Banner data={BannerData}/>
-      <Products/>
-      <Banner data={BannerData2}/>
       <Blogs/>
+      {/* <Pricing/> */}
+      <Banner data={BannerData}/>
+      <Products ref={products}/>
+      <Banner data={BannerData2}/>
       <Partners/>
-      <Footer/>
+      <Footer ref={contact}/>
       <Popup orderPopup={orderPopup} handleOrderPopup={handleOrderPopup}/>
     </div>
   )

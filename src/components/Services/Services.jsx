@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import  {
     FaCarSide,
     FaHeadphonesAlt,
@@ -42,9 +42,9 @@ const ServiceData = [
     }
 ];
 
-const Services = () => {
+const Services = forwardRef((props, ref) => {
   return (
-    <div>
+    <div ref={ref}>
         <div className="container my-14 md:my-20">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4
             gap-y-8">
@@ -64,6 +64,6 @@ const Services = () => {
         </div>
     </div>
   )
-}
+});
 
 export default Services

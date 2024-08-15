@@ -1,6 +1,7 @@
-import React from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaMobileAlt } from "react-icons/fa";
 import { FaLocationArrow } from "react-icons/fa6";
+import Loader from "../Loader/Loader";
 
 const FooterLinks = [
     {
@@ -25,9 +26,50 @@ const FooterLinks = [
     }
 ]
 
-const Footer = () => {
+const Footer = forwardRef((props, ref) => {
+  const [fastUrl, setFastUrl] = useState([]);
+  const [imptUrl, setImptUrl] = useState([]);
+  const [footerName, setFooterName] = useState([]);
+  const [loading, setLoading]  = useState(false);
+
+  const fetchFastUrl = async () => {
+    setLoading(true);
+    const response = await fetch("https://demo9.art-feat.com/api/fast-url");
+        
+    const dataResponse = await response.json();
+    setLoading(false);
+    setFastUrl(dataResponse.data);
+    //console.log(pricePlan);
+};
+
+const fetchImpUrl = async () => {
+    setLoading(true);
+    const response = await fetch("https://demo9.art-feat.com/api/import-url");
+    const dataResponse = await response.json();
+    setLoading(false);
+    setImptUrl(dataResponse.data);
+    //console.log(pricePlan);
+};
+
+const fetchFooterName = async () => {
+    setLoading(true);
+    const response = await fetch("https://demo9.art-feat.com/api/footer-name");
+    const dataResponse = await response.json();
+    setLoading(false);
+    setFooterName(dataResponse.data);
+};
+
+useEffect(() => {
+    fetchFastUrl();
+    fetchImpUrl();
+    fetchFooterName();
+  },[]);
+
+if (loading) {
+    return <Loader/>;
+  }
   return (
-    <div className="dark:bg-gray-950">
+    <div ref={ref} className="dark:bg-gray-950">
       <div className="container">
         <div data-aos="zoom-in" className="grid md:grid-cols-3 pb-20 pt-5">
           {/* company details */}
@@ -37,15 +79,18 @@ const Footer = () => {
               className="text-primary font-semibold
               tracking-widest text-2xl uppercase
               sm:text-3xl"
-            >
-              متجري
+            >              
+                {footerName.map((item,i) => { 
+                    return (
+                        <>
+                        <p key={i}>{item.name}</p>
+                        <p className="text-gray-600 dark:text-white/70
+                        lg:pl-24 pt-3">{item.desc}</p>
+                        </>  
+                    )
+                })}
             </a>
-            <p className="text-gray-600 dark:text-white/70
-            lg:pl-24 pt-3">
-                كيف تتمكن من تكوين متجرك الكتروني باستخدام
-                أنظمة تكوين متوفرة على أي
-            </p>
-            <p className="text-gray-500 mt-4">صنعت 💕 بواسطة تايــجر</p>
+            <p className="text-gray-500 mt-4">صنعت 💕 بواسطة متـــجري</p>
             <a href="" target="_blank"
             className="inline-block bg-primary/90 text-white
             py-2 px-4 mt-4 text-sm rounded-full">قناتنـا عـلى يـوتـيــوب</a>
@@ -57,12 +102,12 @@ const Footer = () => {
                 <h1 className="text-xl font-bold sm:text-right mb-3">روابط هامة</h1>
                 <ul className="space-y-3">
                     {
-                        FooterLinks.map((link, index) =>(
+                        fastUrl.map((link, index) =>(
                             <li key={index}>
-                                <a href={link.link}
+                                <a href={link.url}
                                 className="text-gray-600 dark:text-gray-400
                                 hover:dark:text-white hover:text-black
-                                duration-300">{link.title}</a>
+                                duration-300">{link.name}</a>
                             </li>
                         ))
                     }
@@ -74,12 +119,12 @@ const Footer = () => {
                 <h1 className="text-xl font-bold sm:text-right mb-3">روابط سريعة</h1>
                 <ul className="space-y-3">
                     {
-                        FooterLinks.map((link, index) =>(
+                        imptUrl.map((link, index) =>(
                             <li key={index}>
-                                <a href={link.link}
+                                <a href={link.url}
                                 className="text-gray-600 dark:text-gray-400
                                 hover:dark:text-white hover:text-black
-                                duration-300">{link.title}</a>
+                                duration-300">{link.name}</a>
                             </li>
                         ))
                     }
@@ -120,6 +165,6 @@ const Footer = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Footer;

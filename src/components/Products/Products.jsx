@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Heading from './../Shared/Heading';
 import ProductCard from './ProductCard';
 
@@ -71,9 +71,9 @@ const ProductsData2 = [
         aosDelay: "600",
     }
 ]
-const Products = () => {
+const Products = forwardRef((props, ref) => {
   return (
-    <div>
+    <div ref={ref}>
         <div className='container'>
             {/** Header section */}
             <Heading title="Our Products"
@@ -85,6 +85,6 @@ const Products = () => {
         </div>
     </div>
   )
-}
+});
 
 export default Products

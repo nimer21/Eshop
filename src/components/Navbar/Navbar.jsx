@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
@@ -47,7 +47,7 @@ const DropdownLinks = [
   },
 ];
 
-const Navbar = ({ handleOrderPopup }) => {
+const Navbar = ({ handleOrderPopup, boy }) => {
   return (
     <div
       className="bg-white dark:bg-gray-900
@@ -70,7 +70,26 @@ const Navbar = ({ handleOrderPopup }) => {
             <div className="hidden lg:block">
               <ul className="flex items-center gp-4">
                 {MenuLinks.map((data, index) => (
-                  <li key={index}>
+                  <li key={index} onClick={
+                    (()=>{
+                      switch (data.name) {
+                        case 'خدماتنا':
+                          return boy[0].current.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",});
+                        
+                        case 'أعمالنا':
+                          return boy[1].current.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",});
+                        case 'تواصل معنا':
+                          boy[2].current.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",});
+                        default:
+                          return 'text-gray-500 hover:text-gray-400';  
+                    }})
+                  }>                    
                     <a
                       href={data.link}
                       className="inline-block px-4
