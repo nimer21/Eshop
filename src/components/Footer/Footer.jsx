@@ -30,6 +30,7 @@ const Footer = forwardRef((props, ref) => {
   const [fastUrl, setFastUrl] = useState([]);
   const [imptUrl, setImptUrl] = useState([]);
   const [footerName, setFooterName] = useState([]);
+  const [socialName, setSocialName] = useState([]);
   const [loading, setLoading]  = useState(false);
 
   const fetchFastUrl = async () => {
@@ -58,11 +59,19 @@ const fetchFooterName = async () => {
     setLoading(false);
     setFooterName(dataResponse.data);
 };
+const fetchSocialName = async () => {
+    setLoading(true);
+    const response = await fetch("https://demo9.art-feat.com/api/social");
+    const dataResponse = await response.json();
+    setLoading(false);
+    setSocialName(dataResponse.data);
+};
 
 useEffect(() => {
     fetchFastUrl();
     fetchImpUrl();
     fetchFooterName();
+    fetchSocialName();
   },[]);
 
 if (loading) {
@@ -130,36 +139,48 @@ if (loading) {
                     }
                 </ul>
             </div>
-            {/* company address */}
+            {
+                socialName.map((social, index) =>(
+                    <div>
+                         {/* company address */}
+            
             <div className="py-8 px-4 col-span-2 sm:col-auto">
             <h1 className="text-xl font-bold sm:text-right 
             mb-3">العنوان</h1>
                 <div>
                     <div className="flex items-center gap-3">
                         <FaLocationArrow/>
-                        <p>Giza, 6th October</p>
+                        <p>{social.name==="Address" ? "Giza, 6th October" : "************"}</p>
                     </div>
                     <div className="flex items-center gap-3 mt-6">
                         <FaMobileAlt/>
-                        <p>+20 1095674808</p>
+                        <p>{social.name === "Mob" ? "+20 1095674808" : "**********"}</p>
                     </div>
                     {/* social links */}
-                    <div className="flex items-center gap-3 mt-6">
-                        <a href="#">
+                   
+                            <div className="flex items-center gap-3 mt-6">
+                        <a href={social.name ==='Insta' ? social.url : null}>
                             <FaInstagram className="text-3xl
                             hover:text-primary duration-300"/>
                         </a>
-                        <a href="#">
+                        <a href={social.name ==='Facebook' ? social.url : null}>
                             <FaFacebook className="text-3xl
                             hover:text-primary duration-300"/>
                         </a>
-                        <a href="#">
+                        <a href={social.name ==='Linked' ? social.url : null}>
                             <FaLinkedin className="text-3xl
                             hover:text-primary duration-300"/>
                         </a>
                     </div>
+                
                 </div>
             </div>
+                    </div>
+                    
+                    
+                ))
+            }
+
           </div>
         </div>
       </div>

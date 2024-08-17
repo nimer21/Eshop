@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import  {
     FaCarSide,
     FaHeadphonesAlt,
     FaWallet,
     FaCheckCircle 
 } from "react-icons/fa";
+import Loader from '../Loader/Loader';
 
 // style = {{transform: 'rotate(90deg)' }}
 const ServiceData = [
@@ -43,18 +44,39 @@ const ServiceData = [
 ];
 
 const Services = forwardRef((props, ref) => {
+    const [serviceName, setServiceName] = useState([]);
+  const [loading, setLoading]  = useState(false);
+
+  const fetchServiceName = async () => {
+    setLoading(true);
+    const response = await fetch("https://demo9.art-feat.com/api/services");
+    const dataResponse = await response.json();
+    setLoading(false);
+    setServiceName(dataResponse.data);
+};
+
+useEffect(() => {
+    fetchServiceName();
+  },[]);
+
+if (loading) {
+    return <Loader/>;
+  }
+
   return (
     <div ref={ref}>
         <div className="container my-14 md:my-20">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4
             gap-y-8">
                 {
-                    ServiceData.map((service) => (
+                    serviceName.map((service,index) => (
                         <div key={service.id} className='flex flex-col items-start sm:flex-row
                         gap-4'>
-                            {service.icon}
+                            {/* {service.icon} */}
+                            <FaCarSide className='text-4xl md:text-5xl
+                                    text-primary' />
                             <div>
-                                <h1 className='lg:text-lg font-bold'>{service.title}</h1>
+                                <h1 className='lg:text-lg font-bold'>{service.name}</h1>
                                 <h1 className='text-gray-400 text-sm'>{service.description}</h1>
                             </div>
                         </div>                        
