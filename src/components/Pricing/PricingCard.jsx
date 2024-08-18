@@ -30,17 +30,17 @@ if (loading) {
             pricePlan.map((plan,index) => {
                 return(
                     <div key={index} className={`w-full max-w-md mx-auto ${
-                        (plan.name==="Premium") ? "order-first lg:order-none lg:scale-110 lg:transform lg:z-10"
+                        (plan.featured) ? "order-first lg:order-none lg:scale-110 lg:transform lg:z-10"
                              : "lg:transform lg:scale-90"
                     }`}>
                     
         <div className={`bg-white border-indigo-600
         rounded-md shadow-xl cursor-pointer relative ${
-            (plan.name==="Premium") ? "border-2" : "border border-opacity-10"
+            (plan.featured) ? "border-2" : "border border-opacity-10"
         }`}>
             {/* popular tag */}
             {
-                 (plan.name==="Premium") ? (
+                 (plan.featured) ? (
                     <span className='bg-primary text-white px-6 py-1 rounded-full
                     uppercase text text-sm font-semibold whitespace-nowrap absolute top-0 left-1/2
                     transform -translate-x-1/2 -translate-y-1/2'>
@@ -53,10 +53,10 @@ if (loading) {
                 <p className='text-3xl font-semibold text-center mb-4'>{plan.name}</p>
                 <div className='flex justify-center items-center'>
                     <div className='flex items-start'>
-                    <p className='text-4xl font-medium'>$</p>
+                    <p className='text-4xl font-medium'>{plan.currency}</p>
                     <p className='text-7xl font-bold'>{plan.price}</p>
                     </div>
-                    <p className='text-2xl text-gray-400'>/month</p>
+                    <p className='text-2xl text-gray-400'>/{plan.frequency}</p>
                 </div>
             </div>
 
