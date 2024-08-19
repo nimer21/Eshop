@@ -74,6 +74,12 @@ useEffect(() => {
     fetchSocialName();
   },[]);
 
+  const renderComponent = () => {
+    console.log(socialName.name);
+
+    
+  };
+
 if (loading) {
     return <Loader/>;
   }
@@ -100,7 +106,7 @@ if (loading) {
                 })}
             </a>
             <p className="text-gray-500 mt-4">صنعت 💕 بواسطة متـــجري</p>
-            <a href="" target="_blank"
+            <a href="https://www.youtube.com/" target="_blank"
             className="inline-block bg-primary/90 text-white
             py-2 px-4 mt-4 text-sm rounded-full">قناتنـا عـلى يـوتـيــوب</a>
           </div>
@@ -111,7 +117,7 @@ if (loading) {
                 <h1 className="text-xl font-bold sm:text-right mb-3">روابط هامة</h1>
                 <ul className="space-y-3">
                     {
-                        fastUrl.map((link, index) =>(
+                        imptUrl.map((link, index) =>(
                             <li key={index}>
                                 <a href={link.url}
                                 className="text-gray-600 dark:text-gray-400
@@ -128,7 +134,7 @@ if (loading) {
                 <h1 className="text-xl font-bold sm:text-right mb-3">روابط سريعة</h1>
                 <ul className="space-y-3">
                     {
-                        imptUrl.map((link, index) =>(
+                        fastUrl.map((link, index) =>(
                             <li key={index}>
                                 <a href={link.url}
                                 className="text-gray-600 dark:text-gray-400
@@ -139,9 +145,7 @@ if (loading) {
                     }
                 </ul>
             </div>
-            {
-                socialName.map((social, index) =>(
-                    <div>
+
                          {/* company address */}
             
             <div className="py-8 px-4 col-span-2 sm:col-auto">
@@ -150,37 +154,57 @@ if (loading) {
                 <div>
                     <div className="flex items-center gap-3">
                         <FaLocationArrow/>
-                        <p>{social.name==="Address" ? "Giza, 6th October" : "************"}</p>
+                        <p>Giza, 6th October</p>
                     </div>
                     <div className="flex items-center gap-3 mt-6">
                         <FaMobileAlt/>
-                        <p>{social.name === "Mob" ? "+20 1095674808" : "**********"}</p>
+                        <p>00201095674808</p>
                     </div>
                     {/* social links */}
-                   
-                            <div className="flex items-center gap-3 mt-6">
-                        <a href={social.name ==='Insta' ? social.url : null}>
-                            <FaInstagram className="text-3xl
-                            hover:text-primary duration-300"/>
-                        </a>
-                        <a href={social.name ==='Facebook' ? social.url : null}>
-                            <FaFacebook className="text-3xl
-                            hover:text-primary duration-300"/>
-                        </a>
-                        <a href={social.name ==='Linked' ? social.url : null}>
-                            <FaLinkedin className="text-3xl
-                            hover:text-primary duration-300"/>
-                        </a>
-                    </div>
+               
+                        <div className="flex items-center gap-3 mt-6">
+                            <div className="flex items-center gap-3 mt-6">  
+
+                                {
+                                    socialName.map((social, index)  => {
+                                        return (
+                                            <div key={index}>
+                                            {(() => {
+                                                switch (social.name) {
+                                                    case 'Insta':
+                                                      return <a href={social.url} target="_blank">
+                                                      <FaInstagram className="text-3xl
+                                                      hover:text-primary duration-300"/>
+                                                  </a>
+                                                    case 'Facebook':
+                                                      return <a href={social.url} target="_blank">
+                                                      <FaFacebook className="text-3xl
+                                                      hover:text-primary duration-300"/>
+                                                  </a>
+                                                    case 'Linked':
+                                                      return <a href={social.url} target="_blank">
+                                                      <FaLinkedin className="text-3xl
+                                                      hover:text-primary duration-300"/>
+                                                  </a>
+                                                    default:
+                                                      return null;
+                                                  }
+    
+                                            })()}
+                                        </div>
+                                        )
+                                    })
+                                }
+
+                        </div>
+                        </div>
+                
                 
                 </div>
             </div>
-                    </div>
                     
                     
-                ))
-            }
-
+         
           </div>
         </div>
       </div>

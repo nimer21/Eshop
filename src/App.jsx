@@ -19,7 +19,7 @@ import PricingCard from './components/Pricing/PricingCard.jsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx'
 
 const BannerData = {
-  discount: "30% OFF",
+  discount: "30% خصم",
   title: "متجرك الكتروني متخصص في التجارة التكنولوجية",
   date: "10 Jul to 28 Jul",
   img: headphone,
@@ -30,7 +30,7 @@ const BannerData = {
 };
 
 const BannerData2 = {
-  discount: "30% OFF",
+  discount: "30% خصم",
   title: "متجرك الكتروني متخصص في التجارة التكنولوجية",
   date: "10 Jul to 28 Jul",
   img: smartwatch2,

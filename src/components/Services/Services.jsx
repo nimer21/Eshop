@@ -73,11 +73,11 @@ if (loading) {
                         <div key={service.id} className='flex flex-col items-start sm:flex-row
                         gap-4'>
                             {/* {service.icon} */}
-                            <FaCarSide className='text-4xl md:text-5xl
+                            <FaCheckCircle className='text-4xl md:text-5xl
                                     text-primary' />
                             <div>
                                 <h1 className='lg:text-lg font-bold'>{service.name}</h1>
-                                <h1 className='text-gray-400 text-sm'>{service.description}</h1>
+                                <h1 className='text-gray-400 text-sm line-clamp-1'>{service.description}</h1>
                             </div>
                         </div>                        
                     ))
